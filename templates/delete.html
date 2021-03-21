@@ -1,0 +1,14 @@
+<body>
+    <h1>削除確認</h1>
+    <p>本当に削除しますか？</p>
+    <ul>
+        <li>内容： {{.xml.Name}}</li>
+        <li>状態： {{.xml.Content}}</li>
+        <li>作成時間： {{.xml.CreatedAt}}</li>
+    </ul>
+
+    <form method="post" action="/delete/{{.xml.ID}}">
+        <p><input type="submit" value="削除"></p>
+        <p><a href="/">戻る</a></p>
+    </form>
+</body>
