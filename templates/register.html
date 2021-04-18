@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+{{template "header" .}}
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+                <h2>追加</h2>
+                <form method="post" action="/new">
+                    <p>名前<input type="textarea" name="name" value=""></p>
+                    <p>XML<input type="textarea" name="content" value=""></p>
+                    <p><input type="submit" value="Send"></p>
+                </form>
+            </div>
+            <div class="col-9">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>名前</th>
+                            <th>XML</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{ range .xmls }}
+                        <tr>
+                            <td>{{ .Name }}</td>
+                            <td>{{ .Content }}</td>
+                            <td><a href="/detail/{{.ID}}">編集</a></td>
+                            <td><a href="/delete_check/{{.ID}}">削除</a></td>
+                        </tr>
+                        {{end}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</body>
+
+</html>

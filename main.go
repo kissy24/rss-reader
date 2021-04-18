@@ -12,11 +12,22 @@ func main() {
 	router := gin.Default()
 	// urls := []string{"", ""}
 	url := "https://news.kddi.com/kddi/corporate/newsrelease/rss/kddi_news_release.xml"
+
+	model.Init()
 	router.LoadHTMLGlob("templates/*.html")
+
+	//Index
 	router.GET("/", func(ctx *gin.Context) {
 		ctx.HTML(200, "index.html", lib.Parse(url))
 	})
-	model.Init()
+
+	//Regist
+	router.GET("/register", func(ctx *gin.Context) {
+		xmls := model.SelectAll()
+		ctx.HTML(200, "register.html", gin.H{
+			"xmls": xmls,
+		})
+	})
 
 	//Create
 	router.POST("/new", func(ctx *gin.Context) {
@@ -33,8 +44,8 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		todo := model.Select(id)
-		ctx.HTML(200, "detail.html", gin.H{"todo": todo})
+		xml := model.Select(id)
+		ctx.HTML(200, "detail.html", gin.H{"xml": xml})
 	})
 
 	//Update
@@ -69,7 +80,7 @@ func main() {
 			panic("ERROR")
 		}
 		model.Delete(id)
-		ctx.Redirect(302, "/")
+		ctx.Redirect(302, "/register")
 
 	})
 	router.Run()

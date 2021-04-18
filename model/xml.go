@@ -7,8 +7,8 @@ import (
 
 type XML struct {
 	gorm.Model
-	name    string
-	content string
+	Name    string
+	Content string
 }
 
 // Open DB
@@ -30,8 +30,17 @@ func Init() {
 // Insert DB
 func Insert(name string, content string) {
 	db := Open()
-	db.Create(&XML{name: name, content: content})
+	db.Create(&XML{Name: name, Content: content})
 	defer db.Close()
+}
+
+// Select All DB
+func SelectAll() []XML {
+	db := Open()
+	var xmls []XML
+	db.Order("created_at desc").Find(&xmls)
+	db.Close()
+	return xmls
 }
 
 // Select DB
@@ -47,8 +56,8 @@ func Select(id int) XML {
 func Update(id int, name string, content string) {
 	db := Open()
 	var xml XML
-	xml.name = name
-	xml.content = content
+	xml.Name = name
+	xml.Content = content
 	db.Save(&xml)
 	db.Close()
 }
