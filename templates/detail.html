@@ -1,13 +1,22 @@
 <body>
-    <h2>detail</h2>
-
-    <p>{{.user.ID}}</p>
-    <p>{{.user.Name}}</p>
-    <p>{{.user.Content}}</p>
-
-    <form method="post" action="/update/{{.xml.ID}}">
-        <p>内容<input type="text" name="name" size="30" value="{{.xml.Text}}"></p>
-        <p>状態<input type="text" name="name" size="30" value="{{.xml.Text}}"></p>
-        <p><input type="submit" value="Send"></p>
-    </form>
+    <h2>詳細</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>名前</th>
+                <th>XML</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <form method="post" action="/update/{{.xml.ID}}">
+                    <td>{{.xml.ID}}</td>
+                    <td><input type="text" name="name" size="30" value="{{.xml.Name}}"></td>
+                    <td><input type="text" name="content" size="30" value="{{.xml.Content}}"></td>
+                    <td><input type="submit" value="Send"></td>
+                </form>
+            </tr>
+        </tbody>
 </body>

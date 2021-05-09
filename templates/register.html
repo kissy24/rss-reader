@@ -17,8 +17,10 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>名前</th>
                             <th>XML</th>
+                            <th></th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -26,10 +28,16 @@
                     <tbody>
                         {{ range .xmls }}
                         <tr>
+                            <td>{{ .ID }}</td>
                             <td>{{ .Name }}</td>
                             <td>{{ .Content }}</td>
+                            <td>
+                                <form method="post" action="/setting/{{.ID}}"><input type="submit" value="設定"></form>
+                            </td>
                             <td><a href="/detail/{{.ID}}">編集</a></td>
-                            <td><a href="/delete_check/{{.ID}}">削除</a></td>
+                            <td>
+                                <form method="post" action="/delete/{{.ID}}"><input type="submit" value="削除"></form>
+                            </td>
                         </tr>
                         {{end}}
                     </tbody>

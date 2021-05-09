@@ -56,6 +56,7 @@ func Select(id int) XML {
 func Update(id int, name string, content string) {
 	db := Open()
 	var xml XML
+	xml.ID = uint(id)
 	xml.Name = name
 	xml.Content = content
 	db.Save(&xml)
